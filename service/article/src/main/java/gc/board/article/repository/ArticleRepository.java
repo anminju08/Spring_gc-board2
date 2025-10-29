@@ -30,4 +30,15 @@ public interface ArticleRepository extends JpaRepository <Article, Long>{
           @Param("limit") Long limit
   );
 
+  @Query(
+          value = "select count(*) from (" +
+                  "     select article_id from article where board_id = :boardId limit :limit" +
+                  ") t",
+          nativeQuery = true
+  )
+
+  Long count(
+          @Param("boardId") Long boardId,
+          @Param("limit") Long limit
+  );
 }

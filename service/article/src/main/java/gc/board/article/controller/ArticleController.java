@@ -3,6 +3,7 @@ package gc.board.article.controller;
 import gc.board.article.service.ArticleService;
 import gc.board.article.service.request.ArticleCreateRequest;
 import gc.board.article.service.request.ArticleUpdateRequest;
+import gc.board.article.service.response.ArticlePageResponse;
 import gc.board.article.service.response.ArticleResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,16 @@ public class ArticleController {
   public ArticleResponse read(@PathVariable Long articleId) {
     return articleService.read(articleId);
   }
+
+  //목록 조회
+  @GetMapping("/v1/articles")
+  public ArticlePageResponse readAll(
+      @RequestParam("boardId") Long boardId,
+      @RequestParam("page") Long page,
+      @RequestParam("pagSize") Long pageSize
+      ) {
+        return articleService.readAll(boardId, page, pageSize);
+    }
 
   //생성 api
   @PostMapping("/v1/articles")

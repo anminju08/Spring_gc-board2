@@ -26,4 +26,10 @@ class ArticleRepositoryTest {
   }
 
 
+  @Test
+  void countTest() {
+      Long count = articleRepository.count(1L,10000L);
+      log.info("count = {}", count);
+  }
+
 }
