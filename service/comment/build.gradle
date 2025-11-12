@@ -1,3 +1,9 @@
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    //데이터베이스 접근하기위해 jap쓸게
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    //mysql쓸게
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    //우리가 만들었던 snowflake쓸게
+    implementation project(':common:snowflake')
 }

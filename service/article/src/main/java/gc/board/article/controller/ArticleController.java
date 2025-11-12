@@ -8,6 +8,8 @@ import gc.board.article.service.response.ArticleResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 //클라이언트와 api 통신을 주고받는 기능을 함.
 //매개체: json -> rest!!!
 @RestController
@@ -32,6 +34,16 @@ public class ArticleController {
       ) {
         return articleService.readAll(boardId, page, pageSize);
     }
+
+  //무한스크롤 목록조회
+  @GetMapping("/v1/articles/infinite-scroll")
+  public List<ArticleResponse> readAllInfiniteScroll(
+          @RequestParam("boardId") Long boardId,
+          @RequestParam("pageSize") Long pageSize,
+          @RequestParam(value = "lastArticleId", required = false) Long lastArticleId
+  ){
+      return articleService.readAllInfiniteScroll(boardId, pageSize, lastArticleId);
+  }
 
   //생성 api
   @PostMapping("/v1/articles")
